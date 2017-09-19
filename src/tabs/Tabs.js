@@ -2,8 +2,14 @@ import React, {Component} from 'react';
 import './tabs.css';
 
 class Tabs extends Component {
-	state = {
-		activeIndex: 0
+	constructor() {
+		super();
+		this.state = {
+			activeIndex: 0
+		}
+	}
+	componentWillMount() {
+		console.log(this.props.position);
 	}
 	selectTabIndex(activeIndex) {
 		this.setState({activeIndex});
@@ -13,9 +19,10 @@ class Tabs extends Component {
 		return data.map((tab, index) => {
 			const isActive = this.state.activeIndex === index;
 			return (
-				<div key={index} className={isActive ? 'tab active' : 'tab'}
-					onClick={() => this.selectTabIndex(index)}
-				>
+				<div
+					key={index}
+					className={isActive ? 'tab active' : 'tab'}
+					onClick={() => this.selectTabIndex(index)}>
 					{tab.label}
 				</div>
 			);
@@ -30,8 +37,9 @@ class Tabs extends Component {
 		);
 	}
 	render() {
+		const tabsClass = 'Tabs ' + (this.props.position === 'LEFT' ? 'left' : '');
 		return (
-			<div className="Tabs">
+			<div className={tabsClass}>
 				<div className="tabs">
 					{this.renderTabs()}
 				</div>
@@ -41,6 +49,10 @@ class Tabs extends Component {
 			</div>
 		);
 	}
+}
+
+Tabs.defaultProps = {
+	position: 'TOP'
 }
 
 export default Tabs;

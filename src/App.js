@@ -31,7 +31,7 @@ class App extends Component {
 
     return (
       flag ? 
-      <Tabs data={tabData} />
+      <Tabs data={tabData} position="LEFT" />
       :
       <div className="App">
         <div className="App-header">
